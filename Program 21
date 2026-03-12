@@ -1,0 +1,30 @@
+from collections import deque
+
+class Solution:
+    def leftView(self, root):
+        if not root:
+            return []
+            
+        result = []
+        queue = deque([root])
+        
+        while queue:
+            # Number of nodes at the current level
+            level_size = len(queue)
+            
+            for i in range(level_size):
+                node = queue.popleft()
+                
+                # If it's the first node of the current level, add to result
+                if i == 0:
+                    result.append(node.data)
+                
+                # Standard BFS: add children to the queue
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+                    
+        return result
+        
+        
